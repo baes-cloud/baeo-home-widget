@@ -67,7 +67,7 @@ public class AgentTerminalActivity extends Activity {
         head.setTypeface(mono);
         head.setTextSize(12);
         head.setTextColor(BaeoHomeRender.SUBTLE);
-        head.setText("bae@home: ~/agent   (help for commands)");
+        head.setText("bae@home: ~/home-handler   (help for commands)");
         root.addView(head);
 
         scroll = new ScrollView(this);
@@ -147,7 +147,7 @@ public class AgentTerminalActivity extends Activity {
                 for (int i = 0; i < lines.length; i++) lines[i] = a.optString(i);
                 if ("error".equals(res.optString("kind"))) col = BaeoHomeRender.WARN;
             } catch (Throwable t) {
-                lines = new String[]{"can't reach the house agent (" + t.getClass().getSimpleName() + ")"};
+                lines = new String[]{"can't reach home-handler (" + t.getClass().getSimpleName() + ")"};
                 col = BaeoHomeRender.BAD;
             }
             final String[] fl = lines;
@@ -156,7 +156,7 @@ public class AgentTerminalActivity extends Activity {
                 int n = log.length();
                 if (n >= 2) log.delete(n - 2, n);   // drop the "…" line
                 for (String l : fl) append(l, fc);
-                BaeoNotifyListener.addLocal(this, "house-agent", String.join(" · ", fl));
+                BaeoNotifyListener.addLocal(this, "home-handler", String.join(" · ", fl));
                 BaeoBriefWidgetProvider.updateAll(this);
                 busy = false;
             });

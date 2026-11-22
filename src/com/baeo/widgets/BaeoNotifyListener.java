@@ -94,7 +94,7 @@ public class BaeoNotifyListener extends NotificationListenerService {
     static String source(String tag, String title, String text) {
         String t = tag == null ? "" : tag.toLowerCase(Locale.US);
         String all = (t + " " + title + " " + text).toLowerCase(Locale.US);
-        if (all.contains("houseagent") || all.contains("house notes") || all.contains("house agent")) return "house-agent";
+        if (all.contains("houseagent") || all.contains("house notes") || all.contains("house agent") || all.contains("home-handler")) return "home-handler";
         if (t.startsWith("house_health")) return "health";   // the homelab health check (remotes, NAS, devices)
         if (all.contains("unifi")) return "unifi";
         if (all.contains("wash") || all.contains("dryer")) return "washer";

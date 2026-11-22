@@ -142,13 +142,14 @@ public class BaeoBriefWidgetProvider extends AppWidgetProvider {
             rv.setViewVisibility(R.id.hit_feed, g.feed != null ? View.VISIBLE : View.GONE);
             rv.setViewVisibility(R.id.hit_cmd, g.feed != null ? View.VISIBLE : View.GONE);
             // Both top rows (Tomorrow, Next alarm) open the Clock app's alarms.
-            place(rv, R.id.hit_now, g.word, scale, openAlarms(context));
-            place(rv, R.id.hit_alarm, g.alarm, scale, openAlarms(context));
+            boolean alerting = BaeoHomeRender.hasAlert(st);   // the alert sits in these two rows; a tap resolves it
+            place(rv, R.id.hit_now, g.word, scale, alerting ? tap(context, BaeoActionReceiver.ACTION_RESOLVE_ALERT, null, 14) : openAlarms(context));
+            place(rv, R.id.hit_alarm, g.alarm, scale, alerting ? tap(context, BaeoActionReceiver.ACTION_RESOLVE_ALERT, null, 16) : openAlarms(context));
             place(rv, R.id.hit_event, g.event, scale, tap(context, BaeoActionReceiver.ACTION_STATUS, null, 11));
             // While an alert is showing it sits where the forecast was, and a tap resolves it.
             // This Week: each day card opens the calendar on that day (an alert card resolves instead).
             int[] dayIds = {R.id.hit_day_0, R.id.hit_day_1, R.id.hit_day_2};
-            boolean al = BaeoHomeRender.hasAlert(st);
+            boolean al = false;   // the day cards stay put now that alerts use the top rows
             RectF[] cards = BaeoHomeRender.dayCards(g);
             for (int i = 0; i < 3; i++) {
                 if (!al && cards != null) place(rv, dayIds[i], cards[i], scale, openCalendar(context, i + 1, 54 + i));
@@ -156,9 +157,7 @@ public class BaeoBriefWidgetProvider extends AppWidgetProvider {
             }
             if (g.feed != null) place(rv, R.id.hit_feed_title, new RectF(g.feed.left, g.feed.top, g.feed.right, g.feed.top + 46f * (wPx / 980f)), scale, openUrl(context, Secrets.AGENT_PAGE_URL, 57));
             rv.setViewVisibility(R.id.hit_feed_title, g.feed != null ? View.VISIBLE : View.GONE);
-            place(rv, R.id.hit_forecast, g.forecast, scale, BaeoHomeRender.hasAlert(st)
-                    ? tap(context, BaeoActionReceiver.ACTION_RESOLVE_ALERT, null, 14)
-                    : tap(context, BaeoActionReceiver.ACTION_REFRESH, null, 10));
+            place(rv, R.id.hit_forecast, g.forecast, scale, tap(context, BaeoActionReceiver.ACTION_REFRESH, null, 10));
             // Icon buttons sit in equal thirds of the pill row; tap zones follow them.
             RectF prow = new RectF(g.disco.left, g.disco.top, g.door.right, g.disco.bottom);
             float t3 = prow.width() / 3f;

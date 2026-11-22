@@ -13,9 +13,9 @@ The home screen widget on my Pixel 10a. One glance tells me what the flat is doi
 - **This Week.** Three day cards: weather, the date, and that day's calendar event (WFH, or the office as a short code). Tap a day and the calendar opens on it.
 - **Lights and door.** Bubble-style buttons on the floorplan's edge that show state and control all lights and my door.
 - **Now playing.** A Bubble Card style pill for the Club Sonos: Tap the art and my Sets app opens.
-- **A terminal.** The last five Home Assistant notifications as log lines (house agent notes, UniFi watcher, the washer, health checks), each source in its own colour. The title bar says `[ OK ]` or `[WARN] door unlocked`, the corner shows HA latency and the last sync. Tap the prompt and you can type to my house agent: `status`, `waiting`, or just ask it something.
+- **A terminal.** The last five Home Assistant notifications as log lines (home-handler notes, UniFi watcher, the washer, health checks), each source in its own colour. The title bar says `[ OK ]` or `[WARN] door unlocked`, the corner shows HA latency and the last sync. Tap the prompt and you can type to [home-handler](https://github.com/baes-cloud/home-handler), the service that watches my house: `status`, `waiting`, or just ask it something.
 
-If the house needs something (a leak, the washing's done), an alert card takes the weather's place until it's sorted.
+If the house needs something (a leak, the washing's done), an alert card takes the Tomorrow and Next alarm rows until it's sorted.
 
 ![A house alert](docs/screenshots/widget-alert.png)
 
@@ -24,14 +24,14 @@ If the house needs something (a leak, the washing's done), an alert card takes t
 1. `HaClient` pulls `/api/states` from Home Assistant every few minutes (every minute while music plays) and the work calendar for the next few days, and caches it.
 2. `BaeoHomeRender` draws the whole widget into one bitmap. `geo()` decides where everything sits and the provider places every tap zone from the same rects, so the picture and the touch targets can't drift apart.
 3. `BaeoNotifyListener` reads only the Home Assistant app's notifications for the terminal (needs notification access).
-4. `AgentTerminalActivity` is the little terminal that pops up over the home screen and posts commands to the house agent.
+4. `AgentTerminalActivity` is the little terminal that pops up over the home screen and posts commands to home-handler.
 
 ### Away from home (Cloudflare)
 
 LAN first, always. If the LAN can't be reached:
 
 - **Home Assistant** goes to its public hostname through a Cloudflare Tunnel. Access lets that host through and the HA token is the gate (the HA companion app can't send Access headers anyway).
-- **The house agent** goes to its own hostname behind Cloudflare Access, using a **service token** made just for this widget. Access only admits that token, and the agent also checks Access's signed JWT is from it, plus its own command token.
+- **home-handler** goes to its own hostname behind Cloudflare Access, using a **service token** made just for this widget. Access only admits that token, and home-handler also checks Access's signed JWT is from it, plus its own command token.
 - After a LAN failure the widget stays on the cloud route for five minutes, then tries home again. The terminal's corner says `cloud 350ms` instead of `ha 40ms`, so I can see which way it went.
 
 ## Build

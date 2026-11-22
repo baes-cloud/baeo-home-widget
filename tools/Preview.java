@@ -72,7 +72,7 @@ public class Preview {
         f.mono = Typeface.createFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf");
         f.monoBold = Typeface.createFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf");
         wfh.feedTime = new String[]{"09:41", "08:00", "07:58", "07:00", "06:30"};
-        wfh.feedSrc = new String[]{"house-agent", "unifi", "washer", "ha", "unifi"};
+        wfh.feedSrc = new String[]{"home-handler", "unifi", "washer", "ha", "unifi"};
         wfh.feedTitle = new String[]{"House notes", "UniFi weekly review", "Washing's done", "Updating sensors", "UniFi 24h"};
         wfh.feedMsg = new String[]{"Door was unlocked 12 min this morning", "2 new devices, 0 threats blocked", "Finished 7:58 · tap when emptied", "", "52 events, 0 threats"};
         save(BaeoHomeRender.render(wfh, f, 980, 988), out + "/home_feed.png");

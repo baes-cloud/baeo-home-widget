@@ -317,12 +317,12 @@ public final class BaeoHomeRender {
         Geo g = geo(st.mediaShow, hasStatus(st), w, h);
         float u = s * Math.max(0.62f, Math.min(1.25f, g.plan.height() / s / MAIN_H));
         float iconX = iconColumn(st, f, g.word, u);
-        drawWork(c, st, f, g.word, u, iconX);
-        drawAlarm(c, st, f, g.alarm, u, iconX);
+        // A house alert (washing done, door left open, leak...) takes the Tomorrow / Next alarm rows until it's sorted.
+        if (hasAlert(st)) drawAlert(c, st, f, new RectF(g.word.left, g.word.top, g.word.right, g.alarm.bottom), u);
+        else { drawWork(c, st, f, g.word, u, iconX); drawAlarm(c, st, f, g.alarm, u, iconX); }
         if (g.event.height() > 0) drawEvent(c, st, f, g.event, u, iconX);
         // A house alert (washing done, door left open, leak...) takes the forecast's place until it's resolved.
-        if (hasAlert(st)) drawAlert(c, st, f, g.forecast, u);
-        else drawForecast(c, st, f, g.forecast, u, iconX);
+        drawForecast(c, st, f, g.forecast, u, iconX);
         drawChips(c, st, f, g, u);
         if (g.feed != null) drawFeed(c, st, f, g.feed, s);
         if (st.mediaShow) drawMedia(c, st, f, g, s);
@@ -415,7 +415,7 @@ public final class BaeoHomeRender {
     private static void drawAlert(Canvas c, HomeState st, Fonts f, RectF r, float u) {
         int col = "alarm".equals(st.alertSeverity) ? BAD : ("warning".equals(st.alertSeverity) ? WARN : ACCENT);
         float cy = r.centerY();
-        float ch = Math.min(r.height() * 0.40f, 38f * u);
+        float ch = Math.min(r.height() * 0.44f, 38f * u);
         RectF pill = new RectF(r.left, cy - ch, r.right, cy + ch);
         c.drawRoundRect(pill, ch, ch, paint(alpha(blend(TONAL, col, 0.30f), 0.92f)));
         c.drawRoundRect(pill, ch, ch, stroke(alpha(col, 0.45f), 1f * u));
@@ -436,7 +436,7 @@ public final class BaeoHomeRender {
             rowText(c, r, u, "Motion", rowLabel(f, u), "Paused", rowValue(f, u, WARN), iconX);
         } else if (hasWork(st) && !eventIsWork(st)) {
             drawCalendarGlyph(c, iconX, r.centerY(), 11f * u, MUTE);
-            rowText(c, r, u, "Calendar", rowLabel(f, u), st.nextEvent, rowValue(f, u, INK), iconX);
+            rowText(c, r, u, "Next up", rowLabel(f, u), st.nextEvent, rowValue(f, u, INK), iconX);
         }
     }
 
@@ -572,6 +572,7 @@ public final class BaeoHomeRender {
             c.drawText(fit(label, lt, room), tx, cy + 18f * u, lt);
         } else {
             Paint lt = text(tc, f.m700, 26f * u);   // same size in both buttons
+            while (lt.measureText(label) > room && lt.getTextSize() > 19f * u) lt.setTextSize(lt.getTextSize() - 0.5f * u);   // "Open 14m" shrinks to fit
             c.drawText(fit(label, lt, room), tx, cy + 10f * u, lt);
         }
     }
@@ -632,7 +633,7 @@ public final class BaeoHomeRender {
     // ---------------------------------------------------------------- notify feed (terminal style, no panel)
     private static int feedColour(String src) {
         switch (src == null ? "" : src) {
-            case "house-agent": return ROSE;
+            case "house-agent": case "home-handler": return ROSE;
             case "you": return ACCENT;
             case "unifi": return HARBOUR;
             case "health": return APPLE;
@@ -725,13 +726,13 @@ public final class BaeoHomeRender {
             c.drawText("$ ", px, y, pd); px += pd.measureText("$ ");
             Paint hint = shaded(alpha(MUTE, 0.55f), mono, 22f * s);
             c.drawRect(new RectF(px, y - 19f * s, px + 13f * s, y + 4f * s), paint(BLUSH));
-            c.drawText("ask the house agent", px + 20f * s, y, hint);
+            c.drawText("ask home-handler", px + 20f * s, y, hint);
             return;
         }
         if (PROMPT_STYLE == 3) {   // starship-style: path, host, chevron; time on the right
             c.drawText("~", px, y, pp); px += pp.measureText("~ ");
             Paint host = shaded(ROSE, monoB, 22f * s);
-            c.drawText("@home-agent", px, y, host); px += host.measureText("@home-agent ");
+            c.drawText("@home-handler", px, y, host); px += host.measureText("@home-handler ");
             Paint chev = shaded(ACCENT, monoB, 24f * s);
             c.drawText("\u276F", px, y, chev); px += chev.measureText("\u276F ");
             c.drawRect(new RectF(px, y + 1f * s, px + 15f * s, y + 4.5f * s), paint(BLUSH));   // underscore cursor
