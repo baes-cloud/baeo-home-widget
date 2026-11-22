@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1x1 Sea glass app tile. The arch shape is baked into the picture; size matches the launcher's icons (53dp on the 10a). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/background"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView android:id="@+id/tile_icon" android:layout_width="53dp" android:layout_height="53dp"
+        android:layout_gravity="center" android:scaleType="fitCenter" android:src="@drawable/tile_terminal"
+        android:contentDescription="@string/tile_terminal_name" />
+</FrameLayout>

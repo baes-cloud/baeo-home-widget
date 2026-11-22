@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The picture is one bitmap. Every tap zone is placed at runtime by BaeoBriefWidgetProvider from BaeoHomeRender.geo(). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView android:id="@+id/home_canvas" android:layout_width="match_parent" android:layout_height="match_parent"
+        android:scaleType="fitXY" android:contentDescription="@string/widget_home_name" />
+    <FrameLayout android:id="@+id/hit_now" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_alarm" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_event" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_forecast" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_disco" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_climate" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_door" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_16" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_feed" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_cmd" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_lights" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_day_0" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_day_1" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_day_2" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_feed_title" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_sets" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_media_info" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_media_prev" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_media_play" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_media_next" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_media_vol_down" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_media_vol_up" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_0" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_1" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_2" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_3" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_4" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_5" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_6" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_7" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_8" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_9" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_10" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_11" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_12" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_13" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_14" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+    <FrameLayout android:id="@+id/hit_fx_15" android:layout_width="1dp" android:layout_height="1dp" android:layout_gravity="top|start" android:clickable="true" android:focusable="true" />
+</FrameLayout>

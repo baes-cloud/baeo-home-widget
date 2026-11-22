@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baeo.widgets"
+    android:versionCode="13"
+    android:versionName="13.0">
+
+    <uses-sdk android:minSdkVersion="31" android:targetSdkVersion="34" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <queries>
+        <package android:name="io.homeassistant.companion.android" />
+        <package android:name="com.android.virtualization.terminal" />
+        <package android:name="com.baeo.sets" />
+        <package android:name="com.sonos.acr2" />
+        <intent>
+            <action android:name="android.intent.action.SHOW_ALARMS" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="content" android:host="com.android.calendar" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="false">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Class name kept from v1 so the Bæo Brief already on the home screen becomes Bæo Home. -->
+        <receiver
+            android:name=".BaeoBriefWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_home_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.baeo.widgets.ACTION_DUMP_PREVIEWS" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_brief_info" />
+        </receiver>
+
+        <!-- 1x1 Sea glass tile that opens Terminal (the launcher can't change other apps' icons). -->
+        <receiver
+            android:name=".TerminalTileProvider"
+            android:exported="true"
+            android:label="@string/tile_terminal_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_tile_terminal_info" />
+        </receiver>
+
+        <!-- Everything that touches the house (door, lights, music) lands here. Not exported:
+             only this app's own widget taps and notification buttons can reach it. -->
+        <receiver
+            android:name=".BaeoActionReceiver"
+            android:exported="false" />
+
+        <!-- The feed's "$" line: a little terminal for the house agent, floating over the home screen. -->
+        <activity
+            android:name=".AgentTerminalActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.baeo.widgets.agent"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- Reads Home Assistant's notifications for the widget's notify feed (needs notification access). -->
+        <service
+            android:name=".BaeoNotifyListener"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+    </application>
+</manifest>

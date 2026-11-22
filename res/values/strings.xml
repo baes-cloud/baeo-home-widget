@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BæoRemote</string>
+    <string name="widget_home_name">Bæo Home</string>
+    <string name="widget_home_desc">Date, forecast, next event and alarm, disco ball, front door, scenes, Club music and a tap-per-room plan.</string>
+    <string name="tile_terminal_name">Terminal (Bæo)</string>
+    <string name="tile_terminal_desc">Sea glass Terminal icon</string>
+</resources>

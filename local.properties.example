@@ -1,0 +1,19 @@
+# Copy to local.properties (git-ignored) and fill in. Everything here is baked into the APK.
+ha.url=http://192.168.1.10:8123
+ha.token=YOUR_LONG_LIVED_HA_TOKEN
+# Optional: HA's public URL, used when the LAN can't be reached
+ha.cloud_url=https://ha.example.com
+# Calendar entity for the work line and the day cards
+calendar=calendar.work
+# Optional house agent (see README): LAN URL, public URL behind Cloudflare Access, its command token
+agent.url=http://192.168.1.20:8790
+agent.cloud_url=https://agent.example.com
+agent.token=
+agent.page_url=https://agent.example.com
+# Cloudflare Access service token for agent.cloud_url
+cf.id=
+cf.secret=
+# Signing
+ks.file=release.keystore
+ks.pass=
+ks.alias=

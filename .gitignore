@@ -1,0 +1,13 @@
+build/
+tools/classes/
+tools/out/
+*.apk
+*.idsig
+*.keystore
+*.jks
+local.properties
+*.tgz
+tools/variants/classes/
+tools/variants/out/
+tools/variants/feed/classes/
+tools/variants/shim/
